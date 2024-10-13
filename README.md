@@ -6,9 +6,28 @@ The Back-end has a exclusive Repository which you can find at:
 
 - [Back-end Repository](https://github.com/gvalluis-dev/oil-gas-api) 
 
-## Steps to run the application
+## Characteristics
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- C# .NET is the chosen stack for the Back-end
+- React (TypeScript) + VITE is the chosen stack for the Front-end
+- Entity Framework is the ORM (Object-Relational Mapper)
+- Swagger + Swashbuckle was used in the Back-end for Documentation
+
+## Used Technologies
+- React
+- Vite
+- Axios (for HTTP requisitions)
+- Material UI (For graphics)
+
+## Steps to run the Dashboard (Front-End)
+
+ 
+- git clone https://github.com/gvalluis-dev/oil-gas-dashboard.git
+- cd oil-gas-dashboard
+
+
+
+## Steps to run the API (Back-End)
 
 - Clone the Dashboard Repo (this one) [Visual Code is recommended]
 - Run "npm install"
@@ -18,39 +37,3 @@ If you are developing a production application, we recommend updating the config
 - It will open the [Swagger Page](https://localhost:7279/swagger/index.html) , which displays the explanation of what everything does 
 - Check if the API localhost code is the correct (7279)
 - Once both, front and back, are running, you should be able to see the Dashboard with real data
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
