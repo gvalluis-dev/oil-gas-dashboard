@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Line } from 'react-chartjs-2';
-import 'chart.js/auto'; // Import necessário para o Chart.js funcionar com React
+import 'chart.js/auto'; 
 import { BarChart } from '@mui/x-charts/BarChart';
-// import * as React from 'react';
-
 
 interface averageValues {
     equipmentId: string,
@@ -23,6 +20,7 @@ export default function SensorChart() {
     const [period, setPeriod] = useState<"1m" | "1w" | "24h" | "48h">("1m");  // Default: 1m
     const [sensorData, setSensorData] = useState<Array<averageValues>>([defaultValue]);
 
+    {/* Função que busca os dados dos sensores e altera os estados da tela de acordo com a resposta da API */}
     const fetchSensorData = async (period: "1m" | "1w" | "24h" | "48h") => {
         try {
             console.log("Buscando dados do sensor...");
@@ -38,6 +36,7 @@ export default function SensorChart() {
         }
     };
 
+     {/* Chama a função para buscar os dados toda vez que "period" muda seu estado */}
     useEffect(() => {
         fetchSensorData(period);
     }, [period]);
