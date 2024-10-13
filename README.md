@@ -45,3 +45,15 @@ The Back-end has a exclusive Repository which you can find at:
   /pages       # Main pages
   /services    # API communication actions
   App.jsx      # Application Root Component 
+
+  ## Vite Configuration
+
+This project uses [Vite](https://vitejs.dev/) as a build and development tool.
+
+### Available Scripts
+
+- `npm run dev`: Starts the development server with Vite.
+- `npm run build`: Builds the application for production.
+- `npm run preview`: Runs a preview of the production version.
+
+Make sure that Vite is properly configured in the `vite.config.js` file to handle routes and communication with the backend API.

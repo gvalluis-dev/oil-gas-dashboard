@@ -4,16 +4,21 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import SensorDashboard from './components/Graphic'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+/**
+ * Main component
+ * The Application Homepage 
+ * @returns JSX.Element
+ */
+
+function App() {
   return (
     <>
       <div className="card">
         <SensorDashboard />
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        {/* Click on the Vite and React logos to learn more */}
       </p>
     </>
   )

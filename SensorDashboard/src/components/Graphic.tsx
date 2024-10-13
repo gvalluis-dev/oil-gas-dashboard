@@ -60,7 +60,7 @@ export default function SensorChart() {
             
 
             {/* Filtro de Período */}
-            <label>Escolha o Período:</label>
+            <label>Choose the timerange</label>
             <button onClick={() => setPeriod("24h")}>
             Last day
             </button>
