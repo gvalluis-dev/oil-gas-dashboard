@@ -2,16 +2,22 @@
 
 This is a dashboard that displays data from sensors, simulating a Gas and Oil industry, that comes from an API.
 
-Currently, two official plugins are available:
+The Back-end has a exclusive Repository which you can find at:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Back-end Repository](https://github.com/gvalluis-dev/oil-gas-api) 
 
-## Expanding the ESLint configuration
+## Steps to run the application
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+- Clone the Dashboard Repo (this one) [Visual Code is recommended]
+- Run "npm install"
+- Run "npm run dev"
+- Clone the [Back-end Repository](https://github.com/gvalluis-dev/oil-gas-api) 
+- Start it using Visual Studio
+- It will open the [Swagger Page](https://localhost:7279/swagger/index.html) , which displays the explanation of what everything does 
+- Check if the API localhost code is the correct (7279)
+- Once both, front and back, are running, you should be able to see the Dashboard with real data
 
 ```js
 export default tseslint.config({
