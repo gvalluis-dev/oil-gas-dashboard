@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 import 'chart.js/auto';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { fetchSensorData } from '../services/SensorService';
@@ -47,7 +46,7 @@ export default function SensorChart() {
 
     {/* Call the function to fetch the data every time "period" changes its state */ }
     useEffect(() => {
-        fetchSensorData(period);
+        getData(period);
     }, [period]);
 
     return (
