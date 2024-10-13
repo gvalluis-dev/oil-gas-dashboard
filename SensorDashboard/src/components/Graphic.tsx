@@ -9,10 +9,15 @@ interface averageValues {
 }
 
 const defaultValue = {
-    "equipmentId": "Id do equipemento",
+    "equipmentId": "Equipment ID",
     "averageValue": 0
 }
 
+/**
+ * Component SensorChart
+ * Displays the average of sensor values ​​for different time periods.
+ * @returns JSX.Element
+ */
 
 export default function SensorChart() {
     const [loading, setLoading] = useState(true);
@@ -20,30 +25,30 @@ export default function SensorChart() {
     const [period, setPeriod] = useState<"1m" | "1w" | "24h" | "48h">("1m");  // Default: 1m
     const [sensorData, setSensorData] = useState<Array<averageValues>>([defaultValue]);
 
-    {/* Função que busca os dados dos sensores e altera os estados da tela de acordo com a resposta da API */}
+    {/* Function that fetches sensor data and changes screen states according to the API response*/}
     const fetchSensorData = async (period: "1m" | "1w" | "24h" | "48h") => {
         try {
-            console.log("Buscando dados do sensor...");
+            console.log("Fetching sensor data...");
             const response = await axios.get(`https://localhost:7279/average?period=${period}`);
             setSensorData(response.data);
             setError(null);
             setLoading(false);
         } catch (error: any) {
             setError(error.response.data);
-            console.error('Erro ao buscar dados:', error.response.data);
+            console.error('Error fetching data:', error.response.data);
             setSensorData([defaultValue]);
             setLoading(false);
         }
     };
 
-     {/* Chama a função para buscar os dados toda vez que "period" muda seu estado */}
+     {/* Call the function to fetch the data every time "period" changes its state */}
     useEffect(() => {
         fetchSensorData(period);
     }, [period]);
 
     return (
         <div>
-            <h1 style={{ marginBottom: 200 }}>Monitoramento de Sensores</h1>
+            <h1 style={{ marginBottom: 200 }}>Sensor Monitoring</h1>
             <BarChart
                 series={[
                     { data: sensorData.map(data => data.averageValue) },
@@ -57,23 +62,23 @@ export default function SensorChart() {
             {/* Filtro de Período */}
             <label>Escolha o Período:</label>
             <button onClick={() => setPeriod("24h")}>
-                Último dia
+            Last day
             </button>
             <button onClick={() => setPeriod("48h")}>
-                Últimos dois dias
+            Last two days
             </button>
             <button onClick={() => setPeriod("1w")}>
-                Última Semana
+            Last Week
             </button>
             <button onClick={() => setPeriod("1m")}>
-                Último Mês
+            Last Month
             </button>
             
-            {/* Exibição de Erro ou Carregamento */}
-            {loading && <p>Carregando dados...</p>}
+            {/* Error Display or Loading */}
+            {loading && <p>Loading data...</p>}
             {error && <p>{error}</p>}
-            {/* Se não houver dados */}
-            {!loading && sensorData.length === 0 && <p>Nenhum dado encontrado.</p>}
+            {/* If there is no data */}
+            {!loading && sensorData.length === 0 && <p>No data found.</p>}
         </div>
 
     );
