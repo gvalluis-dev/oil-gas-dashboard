@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import 'chart.js/auto'; 
+import 'chart.js/auto';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { fetchSensorData } from '../services/SensorService';
 
 interface averageValues {
     equipmentId: string,
@@ -25,23 +26,26 @@ export default function SensorChart() {
     const [period, setPeriod] = useState<"1m" | "1w" | "24h" | "48h">("1m");  // Default: 1m
     const [sensorData, setSensorData] = useState<Array<averageValues>>([defaultValue]);
 
-    {/* Function that fetches sensor data and changes screen states according to the API response*/}
-    const fetchSensorData = async (period: "1m" | "1w" | "24h" | "48h") => {
+    {/* Function that fetches sensor data and changes screen states according to the API response*/ }
+    const getData = async (period: "1m" | "1w" | "24h" | "48h") => {
+        setError(null);
+        setLoading(true);
         try {
-            console.log("Fetching sensor data...");
-            const response = await axios.get(`https://localhost:7279/average?period=${period}`);
-            setSensorData(response.data);
-            setError(null);
-            setLoading(false);
+            console.log("Getting sensor data...");
+            const response = await fetchSensorData(period);
+            setSensorData(response);
         } catch (error: any) {
             setError(error.response.data);
-            console.error('Error fetching data:', error.response.data);
+            console.error('Error getting data:', error.response.data);
             setSensorData([defaultValue]);
+            setLoading(false);
+        } finally {
             setLoading(false);
         }
     };
+    
 
-     {/* Call the function to fetch the data every time "period" changes its state */}
+    {/* Call the function to fetch the data every time "period" changes its state */ }
     useEffect(() => {
         fetchSensorData(period);
     }, [period]);
@@ -57,23 +61,23 @@ export default function SensorChart() {
                 xAxis={[{ data: sensorData.map(data => data.equipmentId), scaleType: 'band' }]}
                 margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
             />
-            
+
 
             {/* Filtro de Período */}
             <label>Choose the timerange</label>
             <button onClick={() => setPeriod("24h")}>
-            Last day
+                Last day
             </button>
             <button onClick={() => setPeriod("48h")}>
-            Last two days
+                Last two days
             </button>
             <button onClick={() => setPeriod("1w")}>
-            Last Week
+                Last Week
             </button>
             <button onClick={() => setPeriod("1m")}>
-            Last Month
+                Last Month
             </button>
-            
+
             {/* Error Display or Loading */}
             {loading && <p>Loading data...</p>}
             {error && <p>{error}</p>}
